@@ -1,15 +1,19 @@
 import express from 'express';
-
+import {create,prodbycate, productById, read, list, remove, update,image, listRelated,listBySearch,list2} from '../controllers/product';
+import{categoryID} from '../controllers/category';
 const router = express.Router();
 
-router.get('/products',(req,res) => {
-    res.send(`<h1>Products list</h1>`)
-    console.log('Product List');
-});
+router.get('/products',list );
+router.get('/productsDesc',list2 );
+router.put('/product/:productId', update);
 
-router.get('/products/:2',(req,res)=>{
-    res.send(`<h2>Detail product</h2>`)
-    console.log('Detail product');
-})
+router.get('/product/:productId',read);
+router.param('productId',productById);
+
+router.delete('/product/:productId',remove);
+router.get('/product/related/:productId',listRelated);
+router.post('/products',create);
+router.get('/product/image/:productId',image);
+router.post('/product/search', listBySearch);
 
 module.exports = router;
