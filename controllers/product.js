@@ -203,10 +203,10 @@ export const list2 = (req, res) => {
  * Module này sẽ trả về các sản phẩm có cùng danh mục 
  */
 export const listRelated = (req, res) => {
-    let limit = req.query.limit ? req.query.limit : 5;
+    let limit = req.query.limit ? req.query.limit : 3;
 
     Product.find({
-        _id: { $ne: req.params },
+        _id: { $ne: req.product },
         categoryId: req.product.categoryId
     }) // $ne: not include
         .limit(limit)
